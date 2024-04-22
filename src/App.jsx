@@ -32,7 +32,7 @@ const App = () => {
           <Navbar />
         </Header>
         <Layout>
-          <Sider width="256px" style={{ backgroundColor: "white" }} hidden={hideSideMenu()}>
+          <Sider style={{ backgroundColor: "white" }} hidden={hideSideMenu()}>
             <SideMenu />
           </Sider>
           <Content style={{ minHeight: "90vh" }}>

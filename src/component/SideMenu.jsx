@@ -34,7 +34,7 @@ const SideMenu = () => {
   return (
     <div className='side-menu'>
       <Menu
-        style={{ width: 256 }}
+        style={{ width: "200px", height: "100%" }}
         mode="inline"
         items={menuItems}
         selectedKeys={selectedKeys}
