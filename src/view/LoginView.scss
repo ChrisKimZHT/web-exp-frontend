@@ -1,9 +1,140 @@
 .login-view {
-  margin-left: 10px;
-  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.6);
+  background-image: url("../assets/background.jpg");
+  background-blend-mode: overlay;
+  background-position: center;
+  background-size: cover;
+  height: 91vh;
 
-  .title {
-    font-size: 1.8rem;
-    font-weight: bold;
+  .login-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 600px;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(1px);
+    border-radius: 20px;
+    transition: 0.2s;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    margin-left: 20px;
+    margin-right: 20px;
+
+    .title {
+      margin-bottom: 0px;
+    }
+
+    .description {
+      color: #999;
+    }
+
+    .divide {
+      border: none;
+      height: 1px;
+      background-color: #ddd;
+      width: 100%;
+    }
+
+    .auth-area {
+      margin: 20px;
+
+      .oauth {
+        .oauth-btn {
+          height: 39.33px;
+          width: 100%;
+          line-height: 40px;
+          font-size: 20px;
+          padding-left: 15px;
+          margin-bottom: 10px;
+          border-radius: 5px;
+          cursor: pointer;
+
+          .label {
+            display: inline;
+            margin-left: 15px;
+            font-size: 16px;
+            vertical-align: top;
+          }
+        }
+
+        .github {
+          background-color: rgba(51, 51, 51, 0.8);
+          color: #fff;
+          transition: 0.2s;
+        }
+
+        .github:hover {
+          background-color: rgba(51, 51, 51, 0.9);
+          transition: 0.2s;
+        }
+
+        .qq {
+          background-color: rgba(76, 151, 208, 0.8);
+          color: #fff;
+          transition: 0.2s;
+        }
+
+        .qq:hover {
+          background-color: rgba(76, 151, 208, 0.9);
+          transition: 0.2s;
+        }
+
+        .wechat {
+          background-color: rgba(105, 173, 74, 0.8);
+          color: #fff;
+          transition: 0.2s;
+        }
+
+        .wechat:hover {
+          background-color: rgba(105, 173, 74, 0.9);
+          transition: 0.2s;
+        }
+
+        @media (min-width: 576px) {
+          padding-right: 8px;
+        }
+      }
+
+      .password-auth {
+        .input-field {
+          margin-bottom: 10px;
+        }
+
+        .input-label {
+          color: #555;
+          padding-right: 3px;
+        }
+
+        .button {
+          width: 100%;
+        }
+
+        @media (min-width: 576px) {
+          padding-left: 8px;
+        }
+      }
+    }
+
+    .buttom-area {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      padding-top: 8px;
+      padding-bottom: 15px;
+      font-size: 0.9rem;
+
+      a {
+        color: #444;
+      }
+    }
+  }
+
+  .login-box:hover {
+    transition: 0.2s;
+    box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.3);
   }
 }
