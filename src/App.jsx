@@ -10,7 +10,7 @@ const App = () => {
   const { pathname } = useLocation();
 
   const hideSideMenu = () => {
-    const includePaths = ['/login', '/register'];
+    const includePaths = ['/login', '/register', '/forget-password'];
     for (let path of includePaths) {
       if (pathname.startsWith(path)) {
         return true;
