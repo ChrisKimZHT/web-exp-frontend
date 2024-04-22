@@ -12,15 +12,22 @@
     padding: 0 10px;
     background-color: #fff;
     border-radius: 10px;
-    overflow: hidden;
+    height: 80vh;
+    overflow-y: auto;    
   }
 
   .note-container {
     padding: 0 10px;
     background-color: #fff;
     border-radius: 10px;
-    height: 94.77%;
+    height: 80vh;
     overflow-y: auto;
+
+    .note-card{
+      width: 100%;
+      word-break: break-all;
+      margin-top: 10px;
+    }
   }
 
   .col {
