@@ -1,9 +1,118 @@
 .register-view {
-  margin-left: 10px;
-  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.6);
+  background-image: url("../assets/background.jpg");
+  background-blend-mode: overlay;
+  background-position: center;
+  background-size: cover;
+  height: 91vh;
 
-  .title {
-    font-size: 1.8rem;
-    font-weight: bold;
+  .register-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 600px;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(1px);
+    border-radius: 20px;
+    transition: 0.2s;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    margin-left: 20px;
+    margin-right: 20px;
+
+    .title {
+      margin-bottom: 0px;
+    }
+
+    .description {
+      color: #999;
+    }
+
+    .divide {
+      border: none;
+      height: 1px;
+      background-color: #ddd;
+      width: 100%;
+    }
+
+    .auth-area {
+      margin: 20px;
+
+      .left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .label {
+          color: #555;
+          font-size: 1rem;
+          margin-bottom: 5px;
+        }
+
+        .avatar-upload {
+          position: relative;
+
+          .avatar {
+            box-sizing: content-box;
+            border: 2px solid #ddd;
+          }
+
+          .upload {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+          }
+        }
+
+        @media (min-width: 576px) {
+          padding-right: 8px;
+        }
+
+        @media (max-width: 576px) {
+          margin-bottom: 20px;
+        }
+      }
+
+      .right {
+        .input-field {
+          margin-bottom: 10px;
+        }
+
+        .input-label {
+          color: #555;
+          padding-right: 3px;
+        }
+
+        .button {
+          width: 100%;
+        }
+
+        @media (min-width: 576px) {
+          padding-left: 8px;
+        }
+      }
+    }
+
+    .buttom-area {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      padding-top: 8px;
+      padding-bottom: 15px;
+      font-size: 0.9rem;
+
+      a {
+        color: #444;
+      }
+    }
+  }
+
+  .login-box:hover {
+    transition: 0.2s;
+    box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.3);
   }
 }
