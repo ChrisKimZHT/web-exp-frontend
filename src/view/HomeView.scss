@@ -5,14 +5,31 @@
   .title {
     font-size: 1.8rem;
     font-weight: bold;
+    margin-bottom: 5px;
   }
 
-  .calender-container{
+  .calender-container {
     padding: 0 10px;
     background-color: #fff;
-    margin-right: 12px;
-    margin-bottom: 12px;
     border-radius: 10px;
     overflow: hidden;
+  }
+
+  .note-container {
+    padding: 0 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    height: 94.77%;
+    overflow-y: auto;
+  }
+
+  .col {
+    padding: 8px;
+  }
+
+  @media (max-width: 991.9px) {
+    .col.left {
+      display: none;
+    }
   }
 }
