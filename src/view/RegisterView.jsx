@@ -26,7 +26,7 @@ const RegisterView = () => {
     // TODO
   }
 
-  const handleLogin = () => {
+  const handleRegister = () => {
     messageApi.info(`Auth: ${email}, ${password}`);
     // TODO
   }
@@ -73,10 +73,10 @@ const RegisterView = () => {
               value={password}
               onChange={(e) => { setPassword(e.target.value); resetStatus(); }}
               status={passwordStatus}
-              onKeyDown={(e) => { if (e.key === 'Enter') handleLogin(); }}
+              onKeyDown={(e) => { if (e.key === 'Enter') window.document.getElementById('confirm-password').focus(); }}
             />
             <Input.Password
-              id='password'
+              id='confirm-password'
               size='large'
               prefix={<div className='input-label'>确认</div>}
               className='input-field'
@@ -84,9 +84,9 @@ const RegisterView = () => {
               value={confirmPassword}
               onChange={(e) => { setConfirmPassword(e.target.value); resetStatus(); }}
               status={confirmPasswordStatus}
-              onKeyDown={(e) => { if (e.key === 'Enter') handleLogin(); }}
+              onKeyDown={(e) => { if (e.key === 'Enter') handleRegister(); }}
             />
-            <Button className='button' type='primary' onClick={handleLogin} size='large'>
+            <Button className='button' type='primary' onClick={handleRegister} size='large'>
               <CheckCircleOutlined />
               注册
             </Button>
