@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import './SideMenu.scss';
 import { Menu } from 'antd';
-import { CalendarOutlined, HomeOutlined, UserOutlined } from '@ant-design/icons';
+import { CalendarOutlined, HomeOutlined, SnippetsOutlined, UserOutlined } from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const menuItems = [
   {
     key: '/',
-    label: '主页',
+    label: '首页看板',
     icon: <HomeOutlined />
+  },
+  {
+    key: '/note',
+    label: '我的便签',
+    icon: <SnippetsOutlined />
   },
   {
     key: '/todo',
