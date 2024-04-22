@@ -85,7 +85,7 @@ const LoginView = () => {
         <hr className='divide' />
         <div className='buttom-area'>
           <div className='left'>
-            <Link to='/forgot-password'>忘记密码</Link>
+            <Link to='/forget-password'>忘记密码</Link>
           </div>
           <div className='right'>
             <Link to='/register'>注册账号</Link>
