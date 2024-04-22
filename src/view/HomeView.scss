@@ -1,5 +1,4 @@
 .home-view {
-  margin-left: 10px;
   margin-top: 5px;
 
   .title {
@@ -13,7 +12,7 @@
     background-color: #fff;
     border-radius: 10px;
     height: 80vh;
-    overflow-y: auto;    
+    overflow-y: auto;
   }
 
   .note-container {
@@ -23,15 +22,20 @@
     height: 80vh;
     overflow-y: auto;
 
-    .note-card{
+    .note-card {
       width: 100%;
       word-break: break-all;
       margin-top: 10px;
     }
   }
 
-  .col {
-    padding: 8px;
+  .col.left {
+    padding-left: 16px;
+  }
+
+  .col.right {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   @media (max-width: 991.9px) {
