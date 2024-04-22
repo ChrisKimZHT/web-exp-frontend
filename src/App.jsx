@@ -25,6 +25,14 @@ const App = () => {
     zIndex: "1000",
   }
 
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      document.querySelector('.ant-layout-sider').style.display = 'block';
+    } else {
+      document.querySelector('.ant-layout-sider').style.display = 'none';
+    }
+  });
+
   return (
     <div className='app'>
       <Layout>
