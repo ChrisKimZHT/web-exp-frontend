@@ -1,13 +1,19 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Avatar, Popover } from 'antd';
 import { LoginOutlined, LogoutOutlined, UserOutlined, FormOutlined, SunOutlined, MoonOutlined } from '@ant-design/icons';
 import './Navbar.scss';
 
 const Navbar = ({ isDarkTheme, setIsDarkTheme }) => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
-  const onLogout = () => { }
+  const themeDisablePath = ['/login', '/register', '/forget-password'];
+
+  const onLogout = () => {
+    localStorage.clear();
+    window.location.reload();
+  }
 
   const userPopoverContent = (
     <div className='navbar-user-popover'>
@@ -30,6 +36,13 @@ const Navbar = ({ isDarkTheme, setIsDarkTheme }) => {
     borderBottom: "#ddd 1px solid",
   };
 
+  useEffect(() => {
+    if (themeDisablePath.includes(pathname)) {
+      setIsDarkTheme(false);
+    }
+    // eslint-disable-next-line
+  }, [pathname]);
+
   return (
     <div className='navbar' style={navExtraStyle}>
       <div className='left'>
@@ -39,9 +52,11 @@ const Navbar = ({ isDarkTheme, setIsDarkTheme }) => {
         </Link>
       </div>
       <div className='right'>
-        <div className='theme-btn' onClick={() => setIsDarkTheme(!isDarkTheme)}>
-          {isDarkTheme ? <MoonOutlined className='icon' /> : <SunOutlined className='icon' />}
-        </div>
+        {themeDisablePath.includes(pathname) ? null : (
+          <div className='theme-btn' onClick={() => setIsDarkTheme(!isDarkTheme)}>
+            {isDarkTheme ? <MoonOutlined className='icon' /> : <SunOutlined className='icon' />}
+          </div>
+        )}
         <Popover content={userPopoverContent}>
           <Avatar size={40} src={localStorage.getItem("avatar")}><UserOutlined /></Avatar>
         </Popover>
