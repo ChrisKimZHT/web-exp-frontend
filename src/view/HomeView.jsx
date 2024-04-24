@@ -52,7 +52,15 @@ const HomeView = () => {
   return (
     <div className='home-view'>
       <Row className='row'>
-        <Col lg={8} className='col left'>
+        <Col lg={16} xs={24} className='col right'>
+          <div className='title'>
+            <CalendarOutlined /> 待办事项
+          </div>
+          <div className='calender-container'>
+            <Calendar />
+          </div>
+        </Col>
+        <Col lg={8} xs={24} className='col left'>
           <div className='title'>
             <SnippetsOutlined /> 便签
           </div>
@@ -62,14 +70,6 @@ const HomeView = () => {
                 {note.content}
               </Card>
             ))}
-          </div>
-        </Col>
-        <Col lg={16} className='col right'>
-          <div className='title'>
-            <CalendarOutlined /> 待办事项
-          </div>
-          <div className='calender-container'>
-            <Calendar />
           </div>
         </Col>
       </Row>
