@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Avatar, Popover } from 'antd';
-import { LoginOutlined, LogoutOutlined, UserOutlined, FormOutlined } from '@ant-design/icons';
+import { LoginOutlined, LogoutOutlined, UserOutlined, FormOutlined, SunOutlined, MoonOutlined } from '@ant-design/icons';
 import './Navbar.scss';
 
-const Navbar = () => {
+const Navbar = ({ isDarkTheme, setIsDarkTheme }) => {
   const navigate = useNavigate();
 
   const onLogout = () => { }
@@ -26,8 +26,8 @@ const Navbar = () => {
   );
 
   const navExtraStyle = {
-    backgroundColor: "rgba(255, 255, 255, 0.8)",
-    borderBottom: "rgba(238, 238, 238, 0.6) 1px solid",
+    backgroundColor: "var(--ant-color-bg-container)",
+    borderBottom: "#ddd 1px solid",
   };
 
   return (
@@ -35,15 +35,18 @@ const Navbar = () => {
       <div className='left'>
         <img className='icon' src="/favicon.png" alt="待办事项" />
         <Link to="/" className='title small-hide'>
-          <span style={{ color: "black" }} className='title-span'>待办事项</span>
+          <span style={{ color: "var(--ant-color-text-base)" }} className='title-span'>待办事项</span>
         </Link>
       </div>
       <div className='right'>
+        <div className='theme-btn' onClick={() => setIsDarkTheme(!isDarkTheme)}>
+          {isDarkTheme ? <MoonOutlined className='icon' /> : <SunOutlined className='icon' />}
+        </div>
         <Popover content={userPopoverContent}>
           <Avatar size={40} src={localStorage.getItem("avatar")}><UserOutlined /></Avatar>
         </Popover>
       </div>
-    </div >
+    </div>
   );
 }
 
