@@ -52,7 +52,7 @@ const HomeView = () => {
   return (
     <div className='home-view'>
       <Row className='row'>
-        <Col lg={16} xs={24} className='col right'>
+        <Col lg={16} xs={24} className='col'>
           <div className='title'>
             <CalendarOutlined /> 待办事项
           </div>
@@ -60,7 +60,7 @@ const HomeView = () => {
             <Calendar />
           </div>
         </Col>
-        <Col lg={8} xs={24} className='col left'>
+        <Col lg={8} xs={24} className='col right'>
           <div className='title'>
             <SnippetsOutlined /> 便签
           </div>
