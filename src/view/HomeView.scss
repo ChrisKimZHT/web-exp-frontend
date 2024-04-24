@@ -2,14 +2,14 @@
   .title {
     font-size: 1.8rem;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
   }
 
   .calender-container {
     padding: 0 10px;
     background-color: var(--ant-color-bg-container);
     border-radius: 10px;
-    height: 80vh;
+    height: calc(100vh - 140px);
     overflow-y: auto;
   }
 
@@ -17,7 +17,7 @@
     padding: 0 10px;
     background-color: var(--ant-color-bg-container);
     border-radius: 10px;
-    height: 80vh;
+    height: calc(100vh - 140px);
     overflow-y: auto;
 
     .note-card {
