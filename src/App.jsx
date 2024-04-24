@@ -39,14 +39,7 @@ const App = () => {
         <Header style={headerStyle}>
           <Navbar />
         </Header>
-        <Layout>
-          <Sider style={{ backgroundColor: "white" }} hidden={hideSideMenu()}>
-            <SideMenu />
-          </Sider>
-          <Content style={{ minHeight: "90vh" }}>
-            <PageRouter />
-          </Content>
-        </Layout>
+        <PageRouter />
       </Layout>
     </div>
   );
