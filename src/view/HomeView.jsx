@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './HomeView.scss';
 import { Calendar, Col, Row, Card } from 'antd';
+import { CalendarOutlined, SnippetsOutlined } from '@ant-design/icons';
 
 const sampleNoteList = [
   {
@@ -53,7 +54,7 @@ const HomeView = () => {
       <Row className='row'>
         <Col lg={8} className='col left'>
           <div className='title'>
-            便签
+            <SnippetsOutlined /> 便签
           </div>
           <div className='note-container'>
             {noteList.map((note, index) => (
@@ -65,7 +66,7 @@ const HomeView = () => {
         </Col>
         <Col lg={16} className='col right'>
           <div className='title'>
-            待办事项
+            <CalendarOutlined /> 待办事项
           </div>
           <div className='calender-container'>
             <Calendar />
