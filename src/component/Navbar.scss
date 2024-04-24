@@ -56,11 +56,14 @@
   }
 }
 
-.navbar-user-popover {
-  margin-left: auto;
+.ant-popover-inner {
+  padding: 5px !important;
+}
 
+.navbar-user-popover {
   .item {
-    margin: 0px 2px;
+    padding: 2px 7px;
+    border-radius: 3px;
     text-align: center;
     transition: 0.3s;
   }
@@ -70,7 +73,7 @@
   }
 
   .clickable:hover {
-    background-color: #eee;
+    background-color: var(--ant-color-bg-text-hover);
     transition: 0.3s;
   }
 }
