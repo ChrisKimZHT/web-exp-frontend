@@ -23,6 +23,21 @@ const LoginView = () => {
   }
 
   const handleLogin = () => {
+    if (!email) {
+      setEmailStatus('error');
+      messageApi.error('请输入邮箱');
+      return;
+    }
+    if (/^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/.test(email) === false) {
+      setEmailStatus('error');
+      messageApi.error('邮箱格式错误');
+      return;
+    }
+    if (!password) {
+      setPasswordStatus('error');
+      messageApi.error('请输入密码');
+      return;
+    }
     messageApi.info(`Auth: ${email}, ${password}`);
     // TODO
   }

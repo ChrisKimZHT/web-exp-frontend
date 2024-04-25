@@ -24,6 +24,32 @@ const ForgetPasswordView = () => {
   }
 
   const handleModify = () => {
+    if (!email) {
+      setEmailStatus('error');
+      messageApi.error('请输入邮箱');
+      return;
+    }
+    if (/^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/.test(email) === false) {
+      setEmailStatus('error');
+      messageApi.error('邮箱格式错误');
+      return;
+    }
+    if (!verifyCode) {
+      setVerifyCodeStatus('error');
+      messageApi.error('请输入验证码');
+      return;
+    }
+    if (!password) {
+      setPasswordStatus('error');
+      messageApi.error('请输入密码');
+      return;
+    }
+    if (password !== confirmPassword) {
+      setPasswordStatus('error');
+      setConfirmPasswordStatus('error');
+      messageApi.error('两次密码不一致');
+      return;
+    }
     messageApi.info(`Auth: ${email}, ${verifyCode}, ${password}, ${confirmPassword}`);
     // TODO
   }
