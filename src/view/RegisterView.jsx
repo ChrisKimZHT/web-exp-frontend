@@ -3,6 +3,7 @@ import './RegisterView.scss';
 import { Input, Button, Row, Col, message, Upload, Avatar } from 'antd';
 import { CheckCircleOutlined, EyeInvisibleOutlined, EyeTwoTone, FormOutlined, UploadOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import service from '../service/service';
 
 const RegisterView = () => {
   const [avatar, setAvatar] = useState("");
@@ -48,9 +49,12 @@ const RegisterView = () => {
       messageApi.error('两次密码不一致');
       return;
     }
-    
-    messageApi.info(`Auth: ${email}, ${password}`);
-    // TODO
+
+    service.user.register(email, password, "").then(res => {
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
+    });
   }
 
   return (
