@@ -41,10 +41,11 @@ const LoginView = () => {
     }
     service.user.login(email, password).then(res => {
       message.success('登录成功');
-      const { token, userId } = res.data;
+      const { token, userId, avatar } = res.data;
       localStorage.setItem('token', token);
       localStorage.setItem('userId', userId);
       localStorage.setItem('email', email);
+      localStorage.setItem('avatar', avatar);
       setTimeout(() => {
         window.location.href = '/';
       }, 1000);

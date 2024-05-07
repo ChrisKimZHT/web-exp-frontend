@@ -24,7 +24,7 @@ const Navbar = ({ isDarkTheme, setIsDarkTheme }) => {
         </>
       ) : (
         <>
-          <div className='item'>{`${localStorage.getItem('username')} #${localStorage.getItem('userID')}`}</div>
+          <div className='item'>{localStorage.getItem('email')}</div>
           <div className='item clickable' onClick={onLogout}><LogoutOutlined />&nbsp;退出登录</div>
         </>
       )}
@@ -58,7 +58,7 @@ const Navbar = ({ isDarkTheme, setIsDarkTheme }) => {
           </div>
         )}
         <Popover content={userPopoverContent}>
-          <Avatar size={40} src={localStorage.getItem("avatar")}><UserOutlined /></Avatar>
+          <Avatar size={40} src={`${window.baseURL}upload/${localStorage.getItem("avatar")}`}><UserOutlined /></Avatar>
         </Popover>
       </div>
     </div>
