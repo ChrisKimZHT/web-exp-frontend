@@ -1,10 +1,10 @@
-import { Axios } from "axios"
+import axios from "axios"
 
 const { baseURL } = window;
 
 const user = {
   register: (email, password, avatar) => {
-    return Axios({
+    return axios({
       baseURL,
       method: 'POST',
       url: '/user/register',
@@ -16,7 +16,7 @@ const user = {
     })
   },
   login: (email, password) => {
-    return Axios({
+    return axios({
       baseURL,
       method: 'POST',
       url: '/user/login',
@@ -27,7 +27,7 @@ const user = {
     })
   },
   check: () => {
-    return Axios({
+    return axios({
       baseURL,
       method: 'POST',
       url: '/user/check'
