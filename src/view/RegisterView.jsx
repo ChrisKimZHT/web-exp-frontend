@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './RegisterView.scss';
 import { Input, Button, Row, Col, Upload, Avatar, App } from 'antd';
 import { CheckCircleOutlined, EyeInvisibleOutlined, EyeTwoTone, FormOutlined, UploadOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import service from '../service/service';
 
 const RegisterView = () => {
@@ -13,6 +13,7 @@ const RegisterView = () => {
   const [emailStatus, setEmailStatus] = useState('');
   const [passwordStatus, setPasswordStatus] = useState('');
   const [confirmPasswordStatus, setConfirmPasswordStatus] = useState('');
+  const navigate = useNavigate();
 
   const { message } = App.useApp();
 
@@ -23,8 +24,9 @@ const RegisterView = () => {
   }
 
   const onAvatarChange = (info) => {
-    message.info(`Avatar: ${info.file.name}`);
-    // TODO
+    if (info.file.status === 'done') {
+      setAvatar(info.file.response.avatar);
+    }
   }
 
   const handleRegister = () => {
@@ -50,10 +52,13 @@ const RegisterView = () => {
       return;
     }
 
-    service.user.register(email, password, "").then(res => {
-      console.log(res);
+    service.user.register(email, password, avatar).then(() => {
+      message.success('注册成功');
+      setTimeout(() => {
+        navigate('/login');
+      }, 1000);
     }).catch(err => {
-      console.log(err);
+      message.error(err.message);
     });
   }
 
@@ -67,13 +72,13 @@ const RegisterView = () => {
           <Col className='left' sm={12} xs={24}>
             <div className='label'>头像</div>
             <div className='avatar-upload'>
-              <Avatar className='avatar' size={160} src={avatar} />
+              <Avatar className='avatar' size={160} src={`${window.baseURL}upload/${avatar}`} />
               <Upload
                 className='upload'
                 action={`${window.baseURL}user/uploadAvatar`}
-                headers={{ Authorization: localStorage.getItem('token') }}
                 onChange={onAvatarChange}
                 showUploadList={false}
+                name='avatar'
               >
                 <Button icon={<UploadOutlined />} shape='circle'></Button>
               </Upload>
