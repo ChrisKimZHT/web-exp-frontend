@@ -3,6 +3,7 @@ import './LoginView.scss';
 import { Input, Button, Row, Col, App } from 'antd';
 import { CheckCircleOutlined, EyeInvisibleOutlined, EyeTwoTone, GithubOutlined, LoginOutlined, QqOutlined, WechatOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import service from '../service/service';
 
 const LoginView = () => {
   const [email, setEmail] = useState('');
@@ -38,8 +39,18 @@ const LoginView = () => {
       message.error('请输入密码');
       return;
     }
-    message.info(`Auth: ${email}, ${password}`);
-    // TODO
+    service.user.login(email, password).then(res => {
+      message.success('登录成功');
+      const { token, userId } = res.data;
+      localStorage.setItem('token', token);
+      localStorage.setItem('userId', userId);
+      localStorage.setItem('email', email);
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 1000);
+    }).catch(err => {
+      message.error(err);
+    });
   }
 
   return (
