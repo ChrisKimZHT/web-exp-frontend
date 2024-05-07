@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './ForgetPasswordView.scss';
-import { Input, Button, message } from 'antd';
+import { Input, Button, App } from 'antd';
 import { CheckCircleOutlined, EyeInvisibleOutlined, EyeTwoTone, UndoOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ const ForgetPasswordView = () => {
   const [passwordStatus, setPasswordStatus] = useState('');
   const [confirmPasswordStatus, setConfirmPasswordStatus] = useState('');
 
-  const [messageApi, messageContextHolder] = message.useMessage();
+  const { message } = App.useApp();
 
   const resetStatus = () => {
     setEmailStatus('');
@@ -26,37 +26,36 @@ const ForgetPasswordView = () => {
   const handleModify = () => {
     if (!email) {
       setEmailStatus('error');
-      messageApi.error('请输入邮箱');
+      message.error('请输入邮箱');
       return;
     }
     if (/^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/.test(email) === false) {
       setEmailStatus('error');
-      messageApi.error('邮箱格式错误');
+      message.error('邮箱格式错误');
       return;
     }
     if (!verifyCode) {
       setVerifyCodeStatus('error');
-      messageApi.error('请输入验证码');
+      message.error('请输入验证码');
       return;
     }
     if (!password) {
       setPasswordStatus('error');
-      messageApi.error('请输入密码');
+      message.error('请输入密码');
       return;
     }
     if (password !== confirmPassword) {
       setPasswordStatus('error');
       setConfirmPasswordStatus('error');
-      messageApi.error('两次密码不一致');
+      message.error('两次密码不一致');
       return;
     }
-    messageApi.info(`Auth: ${email}, ${verifyCode}, ${password}, ${confirmPassword}`);
+    message.info(`Auth: ${email}, ${verifyCode}, ${password}, ${confirmPassword}`);
     // TODO
   }
 
   return (
     <div className='forget-password-view'>
-      {messageContextHolder}
       <div className='box'>
         <h1 className='title'><UndoOutlined />&nbsp;忘记密码</h1>
         <p className='description'>忘记密码可在此重置密码</p>

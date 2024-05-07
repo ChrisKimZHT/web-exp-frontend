@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './LoginView.scss';
-import { Input, Button, Row, Col, message } from 'antd';
+import { Input, Button, Row, Col, App } from 'antd';
 import { CheckCircleOutlined, EyeInvisibleOutlined, EyeTwoTone, GithubOutlined, LoginOutlined, QqOutlined, WechatOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ const LoginView = () => {
   const [emailStatus, setEmailStatus] = useState('');
   const [passwordStatus, setPasswordStatus] = useState('');
 
-  const [messageApi, messageContextHolder] = message.useMessage();
+  const { message } = App.useApp();
 
   const resetStatus = () => {
     setEmailStatus('');
@@ -18,33 +18,32 @@ const LoginView = () => {
   }
 
   const handleOauth = (type) => {
-    messageApi.info(`OAuth: ${type}`);
+    message.info(`OAuth: ${type}`);
     // TODO
   }
 
   const handleLogin = () => {
     if (!email) {
       setEmailStatus('error');
-      messageApi.error('请输入邮箱');
+      message.error('请输入邮箱');
       return;
     }
     if (/^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/.test(email) === false) {
       setEmailStatus('error');
-      messageApi.error('邮箱格式错误');
+      message.error('邮箱格式错误');
       return;
     }
     if (!password) {
       setPasswordStatus('error');
-      messageApi.error('请输入密码');
+      message.error('请输入密码');
       return;
     }
-    messageApi.info(`Auth: ${email}, ${password}`);
+    message.info(`Auth: ${email}, ${password}`);
     // TODO
   }
 
   return (
     <div className='login-view'>
-      {messageContextHolder}
       <div className='login-box'>
         <h1 className='title'><LoginOutlined />&nbsp;登录</h1>
         <p className='description'>登录以使用完整功能</p>
