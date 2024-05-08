@@ -35,6 +35,71 @@ const user = {
   }
 }
 
-const service = { user };
+const note = {
+  create: (title, content) => {
+    return axios({
+      baseURL,
+      method: 'POST',
+      url: '/note/create',
+      data: {
+        title,
+        content
+      }
+    })
+  },
+  detele: (noteId) => {
+    return axios({
+      baseURL,
+      method: 'DELETE',
+      url: '/note/delete',
+      params: {
+        noteId
+      }
+    })
+  },
+  update: (noteId, title, content, date, isStared) => {
+    return axios({
+      baseURL,
+      method: 'POST',
+      url: '/note/update',
+      data: {
+        noteId,
+        title,
+        content,
+        date,
+        isStared
+      }
+    })
+  },
+  list: () => {
+    return axios({
+      baseURL,
+      method: 'GET',
+      url: '/note/list'
+    })
+  },
+  get: (noteId) => {
+    return axios({
+      baseURL,
+      method: 'GET',
+      url: '/note/get',
+      params: {
+        noteId
+      }
+    })
+  },
+  toggleStar: (noteId) => {
+    return axios({
+      baseURL,
+      method: 'GET',
+      url: '/note/toggleStar',
+      params: {
+        noteId
+      }
+    })
+  }
+}
+
+const service = { user, note };
 
 export default service;
