@@ -47,7 +47,7 @@ const note = {
       }
     })
   },
-  detele: (noteId) => {
+  delete: (noteId) => {
     return axios({
       baseURL,
       method: 'DELETE',
