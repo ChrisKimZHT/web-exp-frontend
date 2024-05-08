@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { App, Form, Table, Tag, Typography, Popconfirm, InputNumber, Input, Switch } from 'antd';
+import { App, Form, Table, Tag, Typography, Popconfirm, InputNumber, Input, Switch, Button } from 'antd';
 import './NoteView.scss';
 import dayjs from 'dayjs';
-import { SnippetsOutlined } from '@ant-design/icons';
+import { PlusCircleOutlined, RedoOutlined, SnippetsOutlined } from '@ant-design/icons';
 import service from '../service/service';
 
 const EditableCell = ({
@@ -126,6 +126,7 @@ const NoteView = () => {
               保存
             </Typography.Link>
             <Popconfirm title="确认放弃更改？" onConfirm={() => setEditingKey('')}>
+              {/* eslint-disable-next-line */}
               <a>取消</a>
             </Popconfirm>
           </span>
@@ -141,7 +142,7 @@ const NoteView = () => {
   const refreshData = () => {
     setIsLoading(true);
     service.note.list().then(res => {
-      const originalData = res.data.data;
+      const originalData = res.data.data.reverse();
       const data = originalData.map((item, index) => {
         const { noteId, title, content, date, isStared } = item;
         return {
@@ -176,13 +177,42 @@ const NoteView = () => {
     };
   });
 
+  const createNewNote = () => {
+    service.note.create("", "").then(res => {
+      message.success('创建成功');
+      refreshData();
+    }).catch(err => {
+      message.error('创建失败');
+    })
+  }
+
   // eslint-disable-next-line
   useEffect(() => { refreshData() }, [])
 
   return (
     <div className='note-view'>
-      <div className='title'>
-        <SnippetsOutlined /> 便签
+      <div className='headline'>
+        <div className='title'>
+          <SnippetsOutlined /> 便签
+        </div>
+        <div className='btns'>
+          <Button
+            className='btn'
+            type='primary'
+            shape='circle'
+            size='large'
+            onClick={refreshData}
+            icon={<RedoOutlined />}
+          />
+          <Button
+            className='btn'
+            type='primary'
+            shape='circle'
+            size='large'
+            onClick={createNewNote}
+            icon={<PlusCircleOutlined />}
+          />
+        </div>
       </div>
       <Form form={form} component={false}>
         <Table
