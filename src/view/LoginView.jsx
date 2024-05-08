@@ -18,10 +18,10 @@ const LoginView = () => {
     setPasswordStatus('');
   }
 
-  const handleOauth = (type) => {
-    message.info(`OAuth: ${type}`);
-    // TODO
-  }
+  // const handleOauth = (type) => {
+  //   message.info(`OAuth: ${type}`);
+  //   // TODO
+  // }
 
   const handleLogin = () => {
     if (!email) {
@@ -50,7 +50,7 @@ const LoginView = () => {
         window.location.href = '/';
       }, 1000);
     }).catch(err => {
-      message.error(err);
+      message.error(`${err}`);
     });
   }
 
