@@ -1,6 +1,26 @@
 .todo-view {
-  .title {
-    font-size: 1.8rem;
-    font-weight: bold;
+  .headline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .title {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .btns {
+      .btn {
+        margin-left: 10px;
+      }
+    }
+  }
+
+}
+
+.ant-popover-content {
+  .ant-popover-inner {
+    padding: 10px 12px !important;
   }
 }
