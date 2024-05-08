@@ -50,7 +50,14 @@ const LoginView = () => {
         window.location.href = '/';
       }, 1000);
     }).catch(err => {
-      message.error(`${err}`);
+      if (err?.response?.status === 500 && (err?.response?.data.message === "UserNotFound" || err?.response?.data.message === "用户名或密码错误")) {
+        setEmailStatus('error');
+        setPasswordStatus('error');
+        message.error('用户名或密码错误');
+        return;
+      } else {
+        message.error(`${err}`);
+      }
     });
   }
 
