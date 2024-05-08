@@ -61,7 +61,7 @@ const LoginView = () => {
         <p className='description'>登录以使用完整功能</p>
         <hr className='divide' />
         <Row className='auth-area'>
-          <Col className='oauth' sm={12} xs={24}>
+          {/* <Col className='oauth' sm={12} xs={24}>
             <div className='oauth-btn github' onClick={() => handleOauth("github")}>
               <GithubOutlined />
               <div className='label'>
@@ -80,8 +80,8 @@ const LoginView = () => {
                 微信登录
               </div>
             </div>
-          </Col>
-          <Col className='password-auth' sm={12} xs={24}>
+          </Col> */}
+          <Col className='password-auth'>
             <Input
               size='large'
               prefix={<div className='input-label'>邮箱</div>}
