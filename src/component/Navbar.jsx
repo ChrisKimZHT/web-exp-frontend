@@ -24,7 +24,8 @@ const Navbar = ({ isDarkTheme, setIsDarkTheme }) => {
         </>
       ) : (
         <>
-          <div className='item'>{localStorage.getItem('email').length > 12 ? localStorage.getItem('email').substring(0, 12) + "..." : localStorage.getItem('email')}</div>
+          <div className='item'>{localStorage.getItem('email').length > 9 ? localStorage.getItem('email').substring(0, 9) + "..." : localStorage.getItem('email')}</div>
+          <div className='item clickable' onClick={() => navigate("/user")}><UserOutlined />&nbsp;个人中心</div>
           <div className='item clickable' onClick={onLogout}><LogoutOutlined />&nbsp;退出登录</div>
         </>
       )}
