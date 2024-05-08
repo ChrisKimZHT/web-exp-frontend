@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { App, Form, Table, Tag, Typography, Popconfirm, InputNumber, Input, Switch, Button } from 'antd';
+import { App, Form, Table, Typography, Popconfirm, InputNumber, Input, Switch, Button } from 'antd';
 import './NoteView.scss';
 import dayjs from 'dayjs';
 import { PlusCircleOutlined, RedoOutlined, SnippetsOutlined, StarOutlined, StarTwoTone } from '@ant-design/icons';
@@ -203,6 +203,13 @@ const NoteView = () => {
     service.note.create("", "").then(res => {
       message.success('创建成功');
       refreshData();
+      editRow({
+        noteId: res.data.noteId,
+        title: '',
+        content: '',
+        date: 0,
+        isStared: false
+      });
     }).catch(err => {
       message.error('创建失败');
     })
@@ -225,6 +232,7 @@ const NoteView = () => {
             size='large'
             onClick={refreshData}
             icon={<RedoOutlined />}
+            disabled={editingKey !== ''}
           />
           <Button
             className='btn'
@@ -233,6 +241,7 @@ const NoteView = () => {
             size='large'
             onClick={createNewNote}
             icon={<PlusCircleOutlined />}
+            disabled={editingKey !== ''}
           />
         </div>
       </div>
