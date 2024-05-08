@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { App, Form, Table, Tag, Typography, Popconfirm, InputNumber, Input, Switch, Button } from 'antd';
 import './NoteView.scss';
 import dayjs from 'dayjs';
-import { PlusCircleOutlined, RedoOutlined, SnippetsOutlined } from '@ant-design/icons';
+import { PlusCircleOutlined, RedoOutlined, SnippetsOutlined, StarOutlined, StarTwoTone } from '@ant-design/icons';
 import service from '../service/service';
 
 const EditableCell = ({
@@ -88,14 +88,16 @@ const NoteView = () => {
       title: '#',
       dataIndex: 'noteId',
       key: 'noteId',
-      width: 60
+      width: 60,
+      align: 'center',
     },
     {
       title: '星标',
       dataIndex: 'isStared',
       key: 'isStared',
-      render: (isStared) => isStared ? <Tag color='gold'>已标</Tag> : <Tag>未标</Tag>,
-      width: 80,
+      render: (isStared) => isStared ? <StarTwoTone /> : <StarOutlined />,
+      width: 70,
+      align: 'center',
       editable: true,
       editType: 'boolean'
     },
