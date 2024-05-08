@@ -82,9 +82,7 @@ const UserView = () => {
           prefix={<div className='input-label'>邮箱</div>}
           className='input-field'
           value={email}
-          onChange={(e) => { setEmail(e.target.value); resetStatus(); }}
-          status={emailStatus}
-          onKeyDown={(e) => { if (e.key === 'Enter') window.document.getElementById('password').focus(); }}
+          disabled
         />
         <Input.Password
           id='password'
