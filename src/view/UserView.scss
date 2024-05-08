@@ -3,4 +3,59 @@
     font-size: 1.8rem;
     font-weight: bold;
   }
+
+  .content {
+    max-width: 500px;
+    margin: 0 auto;
+
+
+    .avatar-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 40px;
+
+      .label {
+        color: #555;
+        font-size: 1rem;
+        margin-bottom: 5px;
+      }
+
+      .avatar-upload {
+        position: relative;
+
+        .avatar {
+          box-sizing: content-box;
+          border: 2px solid #ddd;
+        }
+
+        .upload {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+        }
+      }
+
+      @media (min-width: 576px) {
+        padding-right: 8px;
+      }
+
+      @media (max-width: 576px) {
+        margin-bottom: 20px;
+      }
+    }
+
+    .input-field {
+      margin-bottom: 10px;
+    }
+
+    .input-label {
+      color: #555;
+      padding-right: 3px;
+    }
+
+    .button {
+      width: 100%;
+    }
+  }
 }

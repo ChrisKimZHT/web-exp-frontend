@@ -32,6 +32,18 @@ const user = {
       method: 'POST',
       url: '/user/check'
     })
+  },
+  update: (email, password, avatar) => { 
+    return axios({
+      baseURL,
+      method: 'POST',
+      url: '/user/update',
+      data: {
+        email,
+        password,
+        avatar
+      }
+    })
   }
 }
 
