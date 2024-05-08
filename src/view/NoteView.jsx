@@ -1,49 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { App, Form, Table, Typography, Popconfirm, InputNumber, Input, Switch, Button } from 'antd';
+import { App, Form, Table, Typography, Popconfirm, Button } from 'antd';
 import './NoteView.scss';
 import dayjs from 'dayjs';
 import { PlusCircleOutlined, RedoOutlined, SnippetsOutlined, StarOutlined, StarTwoTone } from '@ant-design/icons';
 import service from '../service/service';
-
-const EditableCell = ({
-  editing,
-  dataIndex,
-  title,
-  inputType,
-  record,
-  index,
-  children,
-  ...restProps
-}) => {
-  const nodeMap = {
-    'number': <InputNumber />,
-    'text': <Input />,
-    'boolean': <Switch />
-  }
-  const inputNode = nodeMap[inputType];
-  return (
-    <td {...restProps}>
-      {editing ? (
-        <Form.Item
-          name={dataIndex}
-          style={{
-            margin: 0,
-          }}
-          rules={[
-            {
-              required: true,
-              message: `${title}不能为空`,
-            },
-          ]}
-        >
-          {inputNode}
-        </Form.Item>
-      ) : (
-        children
-      )}
-    </td>
-  );
-};
+import EditableCell from '../component/EditableCell';
 
 const NoteView = () => {
   const [form] = Form.useForm();
