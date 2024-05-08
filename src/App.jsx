@@ -6,11 +6,19 @@ import Navbar from './component/Navbar';
 import { ConfigProvider, theme } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
 import 'dayjs/locale/zh-cn';
+import { checkToken } from './util/checkToken';
+import { useLocation } from 'react-router-dom';
 
 const App = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
-
   const { darkAlgorithm } = theme;
+  const { pathname } = useLocation();
+
+  if (checkToken() === false) {
+    if (pathname !== '/login' && pathname !== '/register' && pathname !== '/forget-password') {
+      window.location.href = '/login';
+    }
+  }
 
   return (
     <ConfigProvider locale={zhCN} theme={{
