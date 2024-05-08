@@ -74,6 +74,15 @@ const NoteView = () => {
     })
   }
 
+  const deleteRow = (noteId) => {
+    service.note.delete(noteId).then(res => {
+      message.success('删除成功');
+      refreshData();
+    }).catch(err => {
+      message.error('删除失败');
+    })
+  }
+
   const columns = [
     {
       title: '#',
@@ -119,9 +128,7 @@ const NoteView = () => {
           <span>
             <Typography.Link
               onClick={() => saveRow(record)}
-              style={{
-                marginRight: 8,
-              }}
+              style={{ marginRight: 8 }}
             >
               保存
             </Typography.Link>
@@ -131,9 +138,21 @@ const NoteView = () => {
             </Popconfirm>
           </span>
         ) : (
-          <Typography.Link disabled={editingKey !== ''} onClick={() => editRow(record)}>
-            编辑
-          </Typography.Link>
+          <span>
+            <Typography.Link
+              disabled={editingKey !== ''}
+              onClick={() => editRow(record)}
+              style={{ marginRight: 8 }}
+            >
+              编辑
+            </Typography.Link>
+            <Popconfirm title="确认删除？" disabled={editingKey !== ''} onConfirm={() => deleteRow(record.noteId)}>
+              {/* eslint-disable-next-line */}
+              <a disabled={editingKey !== ''} style={{ color: editingKey === '' ? 'red' : null }}>
+                删除
+              </a>
+            </Popconfirm>
+          </span>
         );
       },
     },
