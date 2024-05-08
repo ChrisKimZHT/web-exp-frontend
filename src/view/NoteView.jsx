@@ -155,6 +155,7 @@ const NoteView = () => {
           </span>
         );
       },
+      width: 100
     },
   ]
 
