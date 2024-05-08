@@ -32,7 +32,7 @@ const EditableCell = ({
           rules={[
             {
               required: true,
-              message: `Please Input ${title}!`,
+              message: `${title}不能为空`,
             },
           ]}
         >
