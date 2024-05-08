@@ -100,6 +100,87 @@ const note = {
   }
 }
 
-const service = { user, note };
+const todo = {
+  create: (title, detail, begin, end, isFinished = false) => {
+    return axios({
+      baseURL,
+      method: 'POST',
+      url: '/todo/create',
+      data: {
+        title,
+        detail,
+        begin,
+        end,
+        isFinished
+      }
+    })
+  },
+  delete: (todoId) => {
+    return axios({
+      baseURL,
+      method: 'DELETE',
+      url: '/todo/delete',
+      params: {
+        todoId
+      }
+    })
+  },
+  update: (todoId, title, detail, begin, end, isFinished) => {
+    return axios({
+      baseURL,
+      method: 'POST',
+      url: '/todo/update',
+      data: {
+        todoId,
+        title,
+        detail,
+        begin,
+        end,
+        isFinished
+      }
+    })
+  },
+  list: () => {
+    return axios({
+      baseURL,
+      method: 'GET',
+      url: '/todo/list'
+    })
+  },
+  get: (todoId) => {
+    return axios({
+      baseURL,
+      method: 'GET',
+      url: '/todo/get',
+      params: {
+        todoId
+      }
+    })
+  },
+  getToday: (year, month, day) => {
+    return axios({
+      baseURL,
+      method: 'GET',
+      url: '/todo/getToday',
+      params: {
+        year,
+        month,
+        day
+      }
+    })
+  },
+  toggleFinish: (todoId) => {
+    return axios({
+      baseURL,
+      method: 'GET',
+      url: '/todo/toggleFinish',
+      params: {
+        todoId
+      }
+    })
+  }
+}
+
+const service = { user, note, todo };
 
 export default service;
