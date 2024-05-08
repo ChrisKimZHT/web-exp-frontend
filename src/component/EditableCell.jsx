@@ -1,15 +1,16 @@
-import { Form, Input, InputNumber, Switch } from 'antd';
+import { DatePicker, Form, Input, InputNumber, Switch } from 'antd';
 import React from 'react';
 
 const EditableCell = ({ editing, dataIndex, title, inputType, record, index, children, ...restProps }) => {
   const nodeMap = {
     'number': <InputNumber />,
     'text': <Input />,
-    'boolean': <Switch />
+    'boolean': <Switch />,
+    'date': <DatePicker showTime showHour showMinute format='YYYY-MM-DD HH:mm' />,
   }
 
   const inputNode = nodeMap[inputType];
-  
+
   return (
     <td {...restProps}>
       {editing ? (
