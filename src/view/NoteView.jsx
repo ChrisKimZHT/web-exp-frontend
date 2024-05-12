@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { App, Form, Table, Typography, Popconfirm, Button } from 'antd';
+import React, { useEffect, useRef, useState } from 'react';
+import { App, Form, Table, Typography, Popconfirm, Button, Input, Space } from 'antd';
 import './NoteView.scss';
 import dayjs from 'dayjs';
-import { PlusCircleOutlined, RedoOutlined, SnippetsOutlined, StarOutlined, StarTwoTone } from '@ant-design/icons';
+import { PlusCircleOutlined, RedoOutlined, SearchOutlined, SnippetsOutlined, StarOutlined, StarTwoTone } from '@ant-design/icons';
 import service from '../service/service';
 import EditableCell from '../component/EditableCell';
 
@@ -12,6 +12,10 @@ const NoteView = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [editingKey, setEditingKey] = useState('');
   const { message } = App.useApp();
+
+  const [, setSearchText] = useState('');
+  const [, setSearchedColumn] = useState('');
+  const searchInput = useRef(null);
 
   const editRow = (record) => {
     form.setFieldsValue({
@@ -44,6 +48,81 @@ const NoteView = () => {
     })
   }
 
+  const handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+    setSearchText(selectedKeys[0]);
+    setSearchedColumn(dataIndex);
+  };
+
+  const handleReset = (clearFilters) => {
+    clearFilters();
+    setSearchText('');
+  };
+
+  const getColumnSearchProps = (dataIndex) => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
+      <div
+        style={{
+          padding: 8,
+        }}
+        onKeyDown={(e) => e.stopPropagation()}
+      >
+        <Input
+          ref={searchInput}
+          placeholder={`搜索 ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{
+            marginBottom: 8,
+            display: 'block',
+          }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+          >
+            搜索
+          </Button>
+          <Button
+            onClick={() => clearFilters && handleReset(clearFilters)}
+            size="small"
+            style={{ width: 90 }}
+          >
+            重置
+          </Button>
+          <Button
+            type="link"
+            size="small"
+            onClick={() => {
+              close();
+            }}
+          >
+            关闭
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: (filtered) => (
+      <SearchOutlined
+        style={{
+          color: filtered ? '#1677ff' : undefined,
+        }}
+      />
+    ),
+    onFilter: (value, record) =>
+      record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+    onFilterDropdownOpenChange: (visible) => {
+      if (visible) {
+        setTimeout(() => searchInput.current?.select(), 100);
+      }
+    },
+  });
+
   const columns = [
     {
       title: '#',
@@ -51,6 +130,7 @@ const NoteView = () => {
       key: 'noteId',
       width: 60,
       align: 'center',
+      ...getColumnSearchProps('noteId')
     },
     {
       title: '星标',
@@ -67,14 +147,16 @@ const NoteView = () => {
       dataIndex: 'title',
       key: 'title',
       editable: true,
-      editType: 'text'
+      editType: 'text',
+      ...getColumnSearchProps('title')
     },
     {
       title: '内容',
       dataIndex: 'content',
       key: 'content',
       editable: true,
-      editType: 'text'
+      editType: 'text',
+      ...getColumnSearchProps('content')
     },
     {
       title: '创建时间',

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './TodoView.scss';
-import { BellTwoTone, CalendarOutlined, CheckCircleOutlined, PlusCircleOutlined, RedoOutlined } from '@ant-design/icons';
-import { App, Button, Form, Table, Typography, Popconfirm } from 'antd';
+import { BellTwoTone, CalendarOutlined, CheckCircleOutlined, PlusCircleOutlined, RedoOutlined, SearchOutlined } from '@ant-design/icons';
+import { App, Button, Form, Table, Typography, Popconfirm, Input, Space } from 'antd';
 import EditableCell from '../component/EditableCell';
 import dayjs from 'dayjs';
 import service from '../service/service';
@@ -13,6 +13,10 @@ const TodoView = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [editingKey, setEditingKey] = useState('');
   const { message } = App.useApp();
+
+  const [, setSearchText] = useState('');
+  const [, setSearchedColumn] = useState('');
+  const searchInput = useRef(null);
 
   const editRow = (record) => {
     form.setFieldsValue({
@@ -45,6 +49,81 @@ const TodoView = () => {
     })
   }
 
+  const handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+    setSearchText(selectedKeys[0]);
+    setSearchedColumn(dataIndex);
+  };
+
+  const handleReset = (clearFilters) => {
+    clearFilters();
+    setSearchText('');
+  };
+
+  const getColumnSearchProps = (dataIndex) => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
+      <div
+        style={{
+          padding: 8,
+        }}
+        onKeyDown={(e) => e.stopPropagation()}
+      >
+        <Input
+          ref={searchInput}
+          placeholder={`搜索 ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{
+            marginBottom: 8,
+            display: 'block',
+          }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+          >
+            搜索
+          </Button>
+          <Button
+            onClick={() => clearFilters && handleReset(clearFilters)}
+            size="small"
+            style={{ width: 90 }}
+          >
+            重置
+          </Button>
+          <Button
+            type="link"
+            size="small"
+            onClick={() => {
+              close();
+            }}
+          >
+            关闭
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: (filtered) => (
+      <SearchOutlined
+        style={{
+          color: filtered ? '#1677ff' : undefined,
+        }}
+      />
+    ),
+    onFilter: (value, record) =>
+      record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+    onFilterDropdownOpenChange: (visible) => {
+      if (visible) {
+        setTimeout(() => searchInput.current?.select(), 100);
+      }
+    },
+  });
+
   const columns = [
     {
       title: '#',
@@ -52,6 +131,7 @@ const TodoView = () => {
       key: 'todoId',
       width: 60,
       align: 'center',
+      ...getColumnSearchProps('todoId')
     },
     {
       title: '状态',
@@ -68,14 +148,16 @@ const TodoView = () => {
       dataIndex: 'title',
       key: 'title',
       editable: true,
-      editType: 'text'
+      editType: 'text',
+      ...getColumnSearchProps('title')
     },
     {
       title: '内容',
       dataIndex: 'detail',
       key: 'detail',
       editable: true,
-      editType: 'text'
+      editType: 'text',
+      ...getColumnSearchProps('detail')
     },
     {
       title: '开始时间',
