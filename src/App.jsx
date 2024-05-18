@@ -14,11 +14,11 @@ const App = () => {
   const { darkAlgorithm } = theme;
   const { pathname } = useLocation();
 
-  if (checkToken() === false) {
+  checkToken().catch(() => {
     if (pathname !== '/login' && pathname !== '/register' && pathname !== '/forget-password') {
       window.location.href = '/login';
     }
-  }
+  })
 
   return (
     <ConfigProvider locale={zhCN} theme={{
