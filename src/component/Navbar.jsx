@@ -37,6 +37,14 @@ const Navbar = ({ isDarkTheme, setIsDarkTheme }) => {
     borderBottom: "#ddd 1px solid",
   };
 
+  const getAvatarURL = () => {
+    const avatar = localStorage.getItem("avatar");
+    if (avatar === null) {
+      return null;
+    }
+    return `${window.baseURL}upload/${avatar}`;
+  }
+
   useEffect(() => {
     if (themeDisablePath.includes(pathname)) {
       setIsDarkTheme(false);
@@ -59,7 +67,7 @@ const Navbar = ({ isDarkTheme, setIsDarkTheme }) => {
           </div>
         )}
         <Popover content={userPopoverContent}>
-          <Avatar size={40} src={`${window.baseURL}upload/${localStorage.getItem("avatar")}`}><UserOutlined /></Avatar>
+          <Avatar size={40} src={getAvatarURL()}><UserOutlined /></Avatar>
         </Popover>
       </div>
     </div>
