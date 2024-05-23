@@ -13,4 +13,5 @@ Web 应用开发 - 实验 & 大作业前端【[后端仓库](https://github.com/
 ### 配置与部署
 
 - 装包：`npm i`
+- 配置：在 `public/index.html` 中修改 `window.baseURL` 为后端地址
 - 启动：`npm start`
